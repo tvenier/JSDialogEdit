@@ -1,0 +1,680 @@
+/*
+    Autor: Teo Venier - http://code.google.com/p/jsdialogedit/
+    Copyright (C) 2011-2014  Teo Venier
+    
+    This file is part of JSDialogEdit.
+
+    JSDialogEdit is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    JSDialogEdit is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with JSDialogEdit.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
+body {
+    height:100%;
+    background-color: #333333 !important; 
+}
+
+#jsdeDivLog {
+    position: fixed;
+    left: 0px;
+    bottom: 0px;
+    width: 100%;
+    height: 100px;
+    border: solid 1px #000000;
+    background-color: #FFFFFF;
+    z-index: 1000;
+    overflow: auto;
+}
+
+.jsdeJanela {
+    position:fixed;
+    overflow: hidden;
+    padding: 0px;
+    background-color: #000000;
+    border-style: solid;
+    border-width: 0px 3px 3px 3px;
+    border-color: #000000;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    -moz-box-shadow: 5px 5px 8px #999999;
+    -webkit-box-shadow: 5px 5px 8px #999999;
+    box-shadow: 5px 5px 8px rgba(255,255,255,0.3);
+}
+.jsdeJanelaInativa{
+    border-color: #666666;
+    background-color: #666666;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+.jsdeJanelaTitulo {
+    color: #FFFFFF;
+    cursor: default;
+    padding-top: 1px;
+    overflow: hidden;
+    white-space: nowrap;
+    font-family: verdana, arial;
+    font-size: 9pt;
+    font-weight: bold;
+    text-align: center;
+}
+.jsdeJanelaIcone {
+    float: left;
+    width: 16px;
+    height: 16px;
+    margin-top: 2px;
+    padding-right: 2px;
+    background-position: left top;
+    background-repeat: no-repeat;
+}
+.jsdeJanelaBarraTitulo {
+    height: 20px;
+    background-color: #000000;
+    cursor: default;
+}
+.jsdeJanelaInativa .jsdeJanelaBarraTitulo {
+    background-color: #666666;
+}
+.jsdeJanelaBarraTitulo_dialog {
+    height: 20px;
+    background-color: #000000;
+    cursor: default;
+}
+.jsdeJanelaInativa .jsdeJanelaBarraTitulo_dialog{
+    background-color: #666666;
+}
+.jsdeJanelaBotoes {
+    float:  right;
+    height: 16px;
+    padding: 0px 2px;
+}
+.jsdeJanelaBotaoFechar, .jsdeJanelaBotaoMaxmizar, .jsdeJanelaBotaoRestaurar, .jsdeJanelaBotaoMinimizar {
+    text-align: center;
+    float: left;
+    width: 24px;
+    height: 14px;
+    border-bottom: 1px solid #AAAAAA;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.jsdeJanelaBotaoFechar {
+    background-image: url(../imagens/icon_fechar.gif);
+    border-right: 1px solid #AAAAAA;
+    -moz-border-radius-bottomright: 3px;
+    border-bottom-right-radius: 3px;
+}
+.jsdeJanelaBarraTitulo_dialog .jsdeJanelaBotaoFechar {
+    border-width: 0px 1px 1px 1px;
+    border-style: solid;
+    border-color: #AAAAAA;
+    -moz-border-radius-bottomleft: 3px;
+    border-bottom-left-radius: 3px;
+}
+.jsdeJanelaBarraTitulo_dialog .jsdeJanelaBotaoMaxmizar, .jsdeJanelaBarraTitulo_dialog .jsdeJanelaBotaoRestaurar, .jsdeJanelaBarraTitulo_dialog .jsdeJanelaBotaoMinimizar {
+    display: none;
+}
+.jsdeJanelaBotaoRestaurar {
+    background-image: url(../imagens/icon_restaurar.gif);
+    border-left: 1px solid #AAAAAA;
+    border-right: 1px solid #AAAAAA;
+}
+.jsdeJanelaBotaoMaxmizar {
+    background-image: url(../imagens/icon_maxmizar.gif);
+    border-left: 1px solid #AAAAAA;
+    border-right: 1px solid #AAAAAA;
+}
+.jsdeJanelaBotaoMinimizar {
+    background-image: url(../imagens/icon_minimizar.gif);
+    border-left: 1px solid #AAAAAA;
+    -moz-border-radius-bottomleft: 3px;
+    border-bottom-left-radius: 3px;
+}
+.jsdeJanelaBotaoFechar:hover, .jsdeJanelaBotaoMaxmizar:hover, .jsdeJanelaBotaoRestaurar:hover, .jsdeJanelaBotaoMinimizar:hover {
+    background-color: #5555FF;
+}
+.jsdeJanelaBotaoFechar:active, .jsdeJanelaBotaoMaxmizar:active, .jsdeJanelaBotaoRestaurar:active, .jsdeJanelaBotaoMinimizar:active {
+    background-color: #555599;
+}
+.jsdeJanelaInativa .jsdeJanelaBotaoFechar,
+.jsdeJanelaInativa .jsdeJanelaBotaoMaxmizar,
+.jsdeJanelaInativa .jsdeJanelaBotaoRestaurar,
+.jsdeJanelaInativa .jsdeJanelaBotaoMinimizar {
+    border-color: #DADADA;
+}
+.jsdeJanelaInativa .jsdeJanelaBotaoFechar:hover,
+.jsdeJanelaInativa .jsdeJanelaBotaoMaxmizar:hover,
+.jsdeJanelaInativa .jsdeJanelaBotaoRestaurar:hover,
+.jsdeJanelaInativa .jsdeJanelaBotaoMinimizar:hover {
+    background-color: #DADADA;
+}
+.jsdeJanelaBotaoFechar:active, .jsdeJanelaBotaoMaxmizar:active, .jsdeJanelaBotaoRestaurar:active, .jsdeJanelaBotaoMinimizar:active {
+    background-color: #666666;
+}
+.jsdeJanelaMinimizada .jsdeJanelaBotaoMinimizar {
+    display: none
+}
+.jsdeJanelaMinimizada .jsdeJanelaBotaoRestaurar, .jsdeJanelaMinimizada .jsdeJanelaBotaoMaxmizar {
+    -moz-border-radius-bottomleft: 3px;
+    border-bottom-left-radius: 3px;
+}
+.jsdeJanelaConteudo {
+    position: relative;
+    cursor: default;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #FFFFFF;
+    background-color: #FFFFFF;
+}
+.jsdeJanelaInativa .jsdeJanelaConteudo {
+    border-color: #FFFFFF;
+}
+.jsdeJanelaInativa .jsdeJanelaIcone {
+    opacity: .25;
+}
+
+.jsdeJanelaBarraStatus {
+    height: 20px;
+    background-color: #E6E6E6;
+    border-style: solid;
+    border-width: 2px 0px 0px 0px;
+    border-color: #000000;
+    cursor: default;
+}
+.jsdeJanelaOverlay {
+    position: fixed;
+    z-index: 1000;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    background-color: #000000;
+    opacity: 0.25;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=25)";
+    filter: alpha(opacity=25); /* IE 7 and Earlier */
+}
+
+.jsdeCampoData {
+    position: fixed;
+    font-family: monospace;
+    font-size: 8pt;
+    border: 1px solid #000000;
+    background-color: #FFFFFF;
+    z-index: 2000;
+}
+.jsdeCampoDataDia {
+    cursor: pointer;
+    border: solid 1px transparent;
+}
+.jsdeCampoDataDiaHoje {
+    color: #0000FF;
+    border: solid 1px #000000;
+}
+.jsdeCampoDataDiaSelecionado {
+    background-color: #CCCCCC;
+    color: #0000FF
+}
+.jsdeCampoDataLinha {
+}
+.jsdeCampoDataCabecalho {
+}
+.jsdeCampoDataRodape {
+    border-top: solid 1px #CCCCCC
+}
+.jsdeCampoDataSemana {
+    border-bottom: 1px solid #CCCCCC;
+}
+.jsdeCampoDataDomingo {
+    color: #FF0000;
+}
+.jsdeCampoDataItem {
+    cursor: pointer;
+}
+.jsdeCampoDataItem:hover {
+    color: #0000FF;
+    background: #E0E0E0;
+}
+.jsdeCampoDataMes {
+    padding: 13px 10px;
+}
+
+.jsdeArvore {
+    overflow-x: hidden;
+    overflow-y: auto;
+    border: 1px inset #CCCCCC;
+}
+.jsdeArvoreItem {
+    white-space: nowrap;
+}
+.jsdeArvoreItemSelecionado {
+}.jsdeArvoreItemMarcado {
+}
+.jsdeArvoreItemIconeBranco, .jsdeArvoreItemIconeExpandir, .jsdeArvoreItemIconeRecolher, .jsdeArvoreItemIcone {
+    display: inline-block;
+    width: 18px;
+    height: 16px;
+    background-position: left top;
+    background-repeat: no-repeat;
+    /* For IE 7 */
+    zoom: 1;
+    *display: inline;
+}
+.jsdeArvoreItemIconeBranco {
+    background-image: url(../imagens/branco.png);
+}
+.jsdeArvoreItemIconeExpandir {
+    background-image: url(../imagens/mais2.gif);
+}
+.jsdeArvoreItemIconeRecolher {
+    background-image: url(../imagens/menos2.gif);
+}
+.jsdeArvoreItemMultiplo {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background-image: url(../imagens/icon_treeview_deselecionado.png);
+    /* For IE 7 */
+    zoom: 1;
+    *display: inline;
+}
+.jsdeArvoreItemMarcado  .jsdeArvoreItemMultiplo {
+    background-image: url(../imagens/icon_treeview_selecionado.png);
+}
+.jsdeArvoreItemLabel {
+    cursor: default;
+    vertical-align: bottom;
+}
+.jsdeArvoreItemSelecionado .jsdeArvoreItemLabel {
+    border: 1px solid #000000;
+    background-color: #000000;
+    color: #FFFFFF;
+}
+
+.jsdeTabPainelConteiner {
+    position: relative;
+    background-color: #666666;
+    border: 1px solid #000000;
+    white-space: nowrap;
+    overflow: hidden;
+}
+.jsdeTabPainelBarraAbas {
+    position: relative;
+    overflow: hidden;
+    height: 27px;
+}
+.jsdeTabPainelBarraInternaAbas {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
+.jsdeTabPainelRolarDireita, .jsdeTabPainelRolarEsquerda {
+    width: 16px;
+    height: 27px;
+    background-color: #666666;
+    background-position: 0% 50%;
+    background-repeat: no-repeat;
+}
+.jsdeTabPainelRolarEsquerda {
+    float: left;
+    background-image: url(../imagens/icon_esquerda.png);
+}
+.jsdeTabPainelRolarDireita {
+    float: right;
+    background-image: url(../imagens/icon_direita.png);
+}
+.jsdeTabPainelRolarDireita:hover, .jsdeTabPainelRolarEsquerda:hover {
+    background-color: #E6E6E6;
+}
+.jsdeTabPainelAba {
+    padding: 0px 2px;
+    background-color: #cccccc;
+    -moz-border-radius: 5px 5px 0px 0px;
+    border-radius: 5px 5px 0px 0px;
+    cursor: pointer;
+    margin-top: 1px;
+    margin-bottom: 1px;
+    margin-left: 1px;
+    margin-right: 1px;
+    line-height: 24px;
+    display: inline-block;
+    /* For IE 7 */
+    zoom: 1;
+    *display: inline;
+}
+.jsdeTabPainelAbaAtiva {
+    background-color: #ffffff;
+    margin-bottom: 0px;
+    line-height: 26px;
+}
+.jsdeTabPainelAbaIcone {
+    width: 16px;
+    height: 16px;
+    margin-top: 5px;
+    padding-right: 2px;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    vertical-align: middle;
+    float: left;
+    /* For IE 7 */
+    zoom: 1;
+    *display: inline;
+}
+.jsdeTabPainelAbaFechar {
+    width: 16px;
+    height: 16px;
+    margin-top: 5px;
+    background-image: url(../imagens/icon_fechar2.gif);
+    background-position: 50% 50%;
+    vertical-align: middle;
+    border-radius: 4px;
+    /*border: solid 1px transparent;*/
+    float: right;
+    /* For IE 7 */
+    zoom: 1;
+    *display: inline;
+}
+.jsdeTabPainelAbaFechar:hover {
+    background-color: #DDDDDD;
+    /*border-style: solid;
+    border-width: 1px;
+    border-top-color: #666666;
+    border-right-color: #FFFFFF;
+    border-bottom-color: #FFFFFF;
+    border-left-color: #666666;*/
+}
+.jsdeTabPainelAbaTitulo {
+    padding-top: 1px;
+    white-space: nowrap;
+    font-family: verdana, arial;
+    font-size: 9pt;
+    font-weight: bold;
+    text-align: center;
+    display: inline-block;
+    min-width: 40px;
+    padding: 0px 2px 0px 2px;
+    /* For IE 7 */
+    zoom: 1;
+    *display: inline;
+}
+.jsdeTabPainelConteudo {
+    display: none;
+    position: absolute;
+    left: 0px;
+    top: 27px;
+    background-color: #ffffff;
+    width: 100%;
+}
+.jsdeTabPainelAbaAtiva + .jsdeTabPainelConteudo {
+    display: block;
+}
+
+.jsdePreenchimentoObrigatorio {
+    background-image: url(../imagens/asterisco.gif) !important;
+    background-repeat: no-repeat !important;
+    background-position: right top !important;
+    padding-right: 8px !important;
+    /*border: inset 1px #F0F0F0;*/
+}
+.jsdeErroPreenchimento {
+    background-color: #FFAAAA !important;
+}
+
+.jsdeTabela {
+    border: solid 1px #000000;
+    font-family: arial, verdana;
+    font-size: 9pt;
+}
+.jsdeTabela thead th, .jsdeTabela tbody td, .jsdeTabela tfoot th {
+    padding: 0px;
+}
+.jsdeTabela thead th, .jsdeTabela tfoot th {
+    height: 20px;
+    background-color: #000000;
+    color: #FFFFFF;
+}
+.jsdeTabela thead th:hover {
+    background-color: #666666;
+    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#666666), to(#000000));/* Safari 4-5, Chrome 1-9 */
+    background: -webkit-linear-gradient(top, #666666, #000000);/* Safari 5.1, Chrome 10+ */
+    background: -moz-linear-gradient(top, #666666, #000000);/* Firefox 3.6+ */
+    background: -ms-linear-gradient(top, #666666, #000000);/* IE 10 */
+    background: -o-linear-gradient(top, #666666, #000000); /* Opera 11.10+ */
+}
+.jsdeTabela thead th {
+    border-bottom: solid 1px #AAAAAA;
+}
+.jsdeTabela tfoot th {
+    border-top: solid 1px #AAAAAA;
+}
+.jsdeTabelaLoading {
+    background-image: url(../imagens/loading.gif);
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+}
+.jsdeTabelaInterna, .jsdeTabelaInterna tbody {
+    width: 100%;
+}
+.jsdeTabelaInterna div {
+    white-space: nowrap;
+}
+.jsdeTabelaCabecalho {
+    overflow: hidden;
+    white-space: nowrap;
+    line-height: 20px;
+}
+.jsdeTabela thead th .jsdeTabelaSplit {
+    float: left;
+    width: 0px;
+    height: 20px;
+    cursor: e-resize;
+    border-width: 0px 1px 0px 1px;
+    border-style: solid;
+    border-color: transparent #FFFFFF transparent #AAAAAA;
+}
+.jsdeTabela thead th:first-child .jsdeTabelaSplit {
+    display: none;
+}
+.jsdeTabelaLinha {
+    background-color: #FFFFFF;
+    vertical-align: top;
+}
+.jsdeTabelaLinhaColorida {
+    background-color: #E6E6E6;
+    vertical-align: top;
+}
+.jsdeTabelaLinha:hover, .jsdeTabelaLinhaColorida:hover {
+    background-color: #D9D9FF;
+}
+.jsdeTabelaLinhaSelecionada {
+    background-color: #CCCCFF;
+    vertical-align: top;
+}
+.jsdeTabelaSeta {
+    float: right;
+    width: 6px;
+    height: 20px;
+    display: none;
+    background-image: url(../imagens/Tabela.Seta.png);
+    background-position: 100% 50%;
+    background-repeat: no-repeat;
+}
+.jsdeTabelaCelula {
+    overflow: hidden;
+    white-space: nowrap;
+    line-height: 20px;
+}
+.jsdeTabelaCelulaString {
+    text-align: left;
+}
+.jsdeTabelaCelulaNumber {
+    text-align: right;
+}
+.jsdeTabelaCelulaBoolean {
+    text-align: center;
+}
+.jsdeTabelaCelulaDateTime {
+    text-align: center;
+}
+.jsdeTabelaCheckboxOn, .jsdeTabelaCheckboxOff {
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+    background-position: left top;
+    background-repeat: no-repeat;
+}
+.jsdeTabelaCheckboxOn {
+    background-image: url(../imagens/icon_checkbox_on.png);
+}
+.jsdeTabelaCheckboxOff {
+    background-image: url(../imagens/icon_checkbox_off.png);
+}
+
+.jsdeMenuConteiner {
+    min-height: 20px;
+    padding: 1px;
+    margin: 0px;
+    background-color: #E0E0E0;
+}
+.jsdeMenuItem {
+    position: relative;
+    padding: 2px 5px 2px 20px;
+    margin: 0px;
+    border: solid 1px transparent;
+    border-radius: 3px;
+    list-style: none;
+    white-space: nowrap;
+    cursor: pointer;
+    background-position: left center;
+    background-repeat: no-repeat;
+    min-width: 16px;
+    min-height: 16px;
+}
+.jsdeMenuConteiner > .jsdeMenuItem {
+    display: inline-block;
+    padding: 2px 5px;
+}
+.jsdeMenuItem:hover {
+    border: 1px solid #707070;
+}
+.jsdeMenuConteiner > .jsdeMenuItem:hover {
+    background-color: #000000;
+    color: #FFFFFF;
+}
+.jsdeMenuCaixa > .jsdeMenuItem {
+    display: block;
+    color: #000000;
+}
+.jsdeMenuCaixa > .jsdeMenuItem:hover {
+    border: solid 1px #C0C0C0;
+    color: #FFFFFF;
+    background-color: #000000;
+    background-color: rgba(0, 0, 0, .8);
+    /*opacity: 0.9;*/
+}
+.jsdeMenuSeta {
+    background-position: 100% 50%;
+    background-repeat: no-repeat;
+}
+.jsdeMenuCaixa .jsdeMenuSeta {
+    background-image: url(../imagens/Tabela.Seta.png);
+}
+.jsdeMenuCaixa {
+    position: absolute;
+    z-index: 500;
+    display: none;
+    border: solid 1px #000000;
+    padding: 2px;
+    margin: 0px;
+    background-color: #E6E6E6;
+    left: 0px;
+    background-image: url(../imagens/linha.png);
+    background-repeat: repeat-y;
+    -moz-box-shadow: 3px 3px 5px #999999;
+    -webkit-box-shadow: 3px 3px 5px #999999;
+    box-shadow: 3px 3px 5px #999999;
+    cursor: default;
+}
+.jsdeMenuCaixa .jsdeMenuCaixa {
+    left: 100%;
+    top: 0%;
+}
+.jsdeMenuAtivo .jsdeMenuItem:hover > .jsdeMenuCaixa {
+    display: block;
+}
+.jsdeMenuCaixa > .jsdeMenuItem span {
+    padding-left: 2px;
+    padding-right: 20px;
+    background-position: right center;
+    background-repeat: no-repeat;
+    display: block;
+}
+.jsdeMenuLinha {
+    position: relative;
+    padding: 0px 0px 0px 20px;
+    margin: 0px;
+    border: none;
+    list-style: none;
+    white-space: nowrap;
+    cursor: default;
+    background-position: left center;
+    background-repeat: no-repeat;
+}
+
+
+.jsdeCalendario {
+    position: fixed;
+    font-family: verdana, arial, tahoma, monospace;
+    font-size: 8pt;
+    border: 1px solid #000000;
+    background-color: #FFFFFF;
+    z-index: 2000;
+    border-radius: 8px;
+    overflow: hidden;
+}
+.jsdeCalendarioDia {
+    cursor: pointer;
+    border: solid 1px transparent;
+}
+.jsdeCalendarioDiaHoje {
+    color: #0000FF;
+    border: solid 1px #000000;
+}
+.jsdeCalendarioDiaSelecionado {
+    background-color: #CCCCCC;
+    color: #0000FF
+}
+.jsdeCalendarioLinha {
+}
+.jsdeCalendarioCabecalho {
+}
+.jsdeCalendarioRodape {
+    border-top: solid 1px #CCCCCC
+}
+.jsdeCalendarioSemana {
+    border-bottom: 1px solid #CCCCCC;
+}
+.jsdeCalendarioDomingo {
+    color: #FF0000;
+}
+.jsdeCalendarioItem {
+    cursor: pointer;
+    padding: 4px;
+    text-align: center;
+}
+.jsdeCalendarioItem:hover {
+    color: #0000FF;
+    background: #E0E0E0;
+}
+.jsdeCalendarioMes {
+    padding: 13px 10px;
+}
+
+

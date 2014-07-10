@@ -1,0 +1,1 @@
+[{"nome_campo1":"string|number|boolean","nome_campo2":"string|number|boolean","nome_campo3":"string|number|boolean"},[{"nome_campo1":"valor1","nome_campo2":"valor2","nome_campo3":"valor3"},{"nome_campo1":"valor4","nome_campo2":"valor5","nome_campo3":"valor6"}]]

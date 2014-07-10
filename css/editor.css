@@ -1,0 +1,321 @@
+/*
+    Autor: Teo Venier - http://code.google.com/p/jsdialogedit/
+    Copyright (C) 2011-2014  Teo Venier
+    
+    This file is part of JSDialogEdit.
+
+    JSDialogEdit is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    JSDialogEdit is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with JSDialogEdit.  If not, see <http://www.gnu.org/licenses/>.
+*/
+body {
+    overflow: hidden;
+    padding: 0px;
+    margin: 0px;
+    background-color: #E0E0E0;
+}
+
+img {
+    vertical-align: middle;
+}
+
+input[readonly] {
+    background-color: #E6E6E6;
+    color: #CCCCCC;
+}
+
+#JSDESaveOpenDialog_btnComputador, #JSDESaveOpenDialog_btnRede, #JSDESaveOpenDialog_btnRecente {
+    font-family: verdana, arial;
+    font-size: 7pt;
+    padding: 48px 0px 0px 0px;
+    height: 70px;
+    border: 1px solid #E6E6E6;
+    background: #E6E6E6 no-repeat 50% 0%;
+}
+#JSDESaveOpenDialog_btnComputador {
+    background-image: url(../imagens/icon_computador.png)
+}
+#JSDESaveOpenDialog_btnRede {
+    background-image: url(../imagens/icon_rede.png)
+}
+#JSDESaveOpenDialog_btnRecente {
+    background-image: url(../imagens/icon_recentes.png)
+}
+#JSDESaveOpenDialog_btnComputador:hover, #JSDESaveOpenDialog_btnRede:hover, #JSDESaveOpenDialog_btnRecente:hover {
+    border-style: outset;
+    border-color:  #D4D0C8;
+}
+#JSDESaveOpenDialog_btnComputador:active, #JSDESaveOpenDialog_btnRede:active, #JSDESaveOpenDialog_btnRecente:active {
+    border-style: inset;
+}
+
+#jsde_arvoreComponentes {
+    font-family: verdana, arial;
+    font-size: 8pt;
+}
+
+#pnlBarraMenu {
+    background-color: #E9E9E9;
+    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#F6F6F6), to(#C9C9C9));/* Safari 4-5, Chrome 1-9 */
+    background: -webkit-linear-gradient(top, #F6F6F6, #C9C9C9);/* Safari 5.1, Chrome 10+ */
+    background: -moz-linear-gradient(top, #F6F6F6, #C9C9C9);/* Firefox 3.6+ */
+    background: -ms-linear-gradient(top, #F6F6F6, #C9C9C9);/* IE 10 */
+    background: -o-linear-gradient(top, #F6F6F6, #C9C9C9);/* Opera 11.10+ */
+    width: 100%;
+    height: 20px;
+    /*
+    margin: 0px;
+    padding: 0px;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    */
+}
+
+.jsde_Botao {
+    margin: 0px;
+    padding: 0px;
+    width: 22px;
+    height: 20px;
+    border: solid 1px transparent;
+    background: no-repeat transparent center;
+}
+.jsde_Botao:hover {
+    border: groove 1px #AFAFAF;
+}
+.jsde_Botao:active {
+    background-color: #E9E9E9;
+}
+.jsde_Botao[disabled] {
+    opacity: 0.25;
+    border-color: transparent;
+    cursor: not-allowed;
+}
+
+.jsde_Botao_precionado  {
+    border: 1px inset;
+    background-color: #E9E9E9;
+    background-position: center center;
+    background-repeat: no-repeat
+}
+
+.jsde_BotaoConfirmar {
+    background-color: transparent;
+    background-image: url("../imagens/icon_accept.png");
+    background-position: 2px center;
+    background-repeat: no-repeat;
+    border-width: 1px;
+    border-style: solid;
+    border-color: transparent;
+    border-radius: 3px;
+    margin: 0 1px;
+    padding: 1px 1px 1px 18px;
+}
+
+.jsde_BotaoCancelar {
+    background-color: transparent;
+    background-image: url(../imagens/icon_cancelar.png);
+    background-position: 2px center;
+    background-repeat: no-repeat;
+    border-width: 1px;
+    border-style: solid;
+    border-color: transparent;
+    border-radius: 3px;
+    margin: 0 2px;
+    padding: 1px 1px 1px 18px;
+}
+
+.jsde_BotaoConfirmar:hover, .jsde_BotaoCancelar:hover {
+    border-color: #999999;
+    box-shadow: -1px 8px 10px rgba(0,0,255,0.06) inset, 0 -3px 2px rgba(0,0,255,0.15) inset;
+}
+
+/*
+.editor_evento {
+    position: absolute;
+    overflow: hidden;
+    border: 2px solid #000000;
+    background-color: #FFFFFF;
+}
+.editor_evento > div {
+    white-space: nowrap;
+    cursor: default;
+    padding: 2px;
+    vertical-align: middle;
+    font-family: verdana, arial;
+    font-size: 10pt;
+    overflow: hidden;
+    background: #E6E6E6;
+}
+.editor_evento > pre {
+    margin: 0px;
+}
+*/
+.btnExpandirValor {
+    position:absolute;
+    width: 16px;
+    height: 16px;
+    right: 0px;
+    margin: 0px;
+    opacity: 0.25;
+}
+.btnExpandirValor:hover,
+.btnExpandirValor:focus {
+    opacity: 1;
+}
+
+.novoComponente, .novoComponente * {
+    cursor: url(../imagens/icon_hand_drag2.png), default !important;
+}
+.duplicarEstilo, .duplicarEstilo * {
+    cursor: url(../imagens/icon_paintcan.png), crosshair !important;
+}
+
+#btnAbrir { background-image: url(../imagens/icon_pasta.gif); }
+#btnNovo { background-image: url(../imagens/icon_novo.gif); }
+#btnSalvar { background-image: url(../imagens/icon_disco.gif); }
+#btnSalvarComo { background-image: url(../imagens/icon_disco_edit.png); }
+#btnExecutar { background-image: url(../imagens/icon_seta_direita.png); }
+#btnJanFerramentas { background-image: url(../imagens/icon_tools.gif); }
+#btnJanPropriedades { background-image: url(../imagens/icon_documento.gif); }
+#btnJanComponentes { background-image: url(../imagens/icon_tree.gif); }
+#btnJanSaida { background-image: url(../imagens/icon_source.png); }
+#btnJanSobre { background-image: url(../imagens/icon_help.png); }
+#btnJanDoc { background-image: url(../imagens/icon_book.png); }
+#btnCSS { background-image: url(../imagens/icon_css.png); }
+#btnCopiar { background-image: url(../imagens/icon_copy.png); }
+#btnRecortar { background-image: url(../imagens/icon_cut.png); }
+#btnColar { background-image: url(../imagens/icon_paste.png); }
+#btnAplicarEstilo { background-image: url(../imagens/icon_brush.png); }
+#btnGrade {
+    background-image: url(../imagens/grid.png);
+    background-repeat: repeat;
+}
+#btnDesfazer { background-image: url(../imagens/icon_undo.png); }
+#btnRefazer { background-image: url(../imagens/icon_redo.png); }
+
+#janPropriedades input, #janPropriedades select {
+    border-width: 1px;
+    border-style: solid;
+    border-color: #F6F6F6;
+    font-family: "Courier New", Courier, mono;
+    font-size: 8pt;
+    background-color: #F0F0F0;
+    -moz-user-select: text;
+}
+#janPropriedades input[type="button"] {
+    padding: 0px;
+    background-color: transparent;
+    border-color: transparent;
+    font-family: verdana, arial;
+    font-weight: bold;
+    width: 20px;
+}
+#janPropriedades input[type="text"]:focus,
+#janPropriedades input[type="text"]:hover,
+#janPropriedades input[type="number"]:focus,
+#janPropriedades input[type="number"]:hover,
+#janPropriedades input[type="button"]:hover,
+#janPropriedades select:hover,
+#janPropriedades select:focus,
+#janPropriedades input[type="button"]:hover + #janPropriedades input[type="text"]
+{
+    border-width: 1px;
+    border-color: #000000;
+    background-color: #FFFFFF;
+}
+
+
+#janComponentes {
+    font-family: verdana, arial;
+    font-size: 8pt;
+}
+
+#jsde_JanProp_AbaPro, #jsde_JanProp_AbaEvt {
+  background-color: #CCCCCC;
+  border-bottom: solid 1px #000000;
+  border-right: solid 1px #000000;
+  font-size: 8pt;
+  cursor: default;
+  height: 15px;
+  white-space: nowrap;
+  font-family: verdana, arial;
+  color: #999999;
+  padding: 1px;
+}
+#jsde_JanProp_AbaPro.ativo, #jsde_JanProp_AbaEvt.ativo {
+  background-color: #FFFFFF;
+  border-bottom-color: #FFFFFF;
+  font-weight: bold;
+  color: #000000;
+}
+
+#jsde_divProp, #jsde_divEvt {
+    height: 390px;
+    border-top: 1px solid #000000;
+    background-color: #F6F6F6;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+#jsde_divProp td, #jsde_divEvt td {
+    font-family: verdana, arial;
+    font-size: 8pt;
+}
+
+#jsde_divDrop {
+    position: absolute;
+    width:20px;
+    height: 20px;
+    background-repeat:no-repeat;
+    background-color:#FFFFFF;
+    background-position: 0% 50%;
+    z-index:1000;
+    font-family:verdana;
+    font-size:9pt;
+}
+
+#jsde_divSelecao {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-bottom: 3px solid #AAAAFF;
+    border-right: 3px solid #AAAAFF;
+}
+
+#jsde_divEstilo {
+    position: absolute;
+    z-index: 10000;
+    width: 20px;
+    height: 20px;
+    border: 3px dotted #000000;
+    background-color: rgba(125, 125, 125, 0.5);
+}
+
+#jsde_btnExpandirBarraComponentes {
+    background-image: url(../imagens/icon_add2.png);
+}
+#jsde_btnRecolherBarraComponentes {
+    background-image: url(../imagens/icon_delete2.png);
+}
+#jsde_btnMoverBaixoBarraComponentes {
+    background-image: url(../imagens/icon_cima.png);
+}
+#jsde_btnMoverCimaBarraComponentes {
+    background-image: url(../imagens/icon_baixo.png);
+}
+#jsde_btnMoverEsquerdaBarraComponentes {
+    background-image: url(../imagens/icon_esquerda.png);
+}
+#jsde_btnMoverDireitaBarraComponentes {
+    background-image: url(../imagens/icon_direita.png);
+}
+

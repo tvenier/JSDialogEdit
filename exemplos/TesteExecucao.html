@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<title>Lorem</title>
+<link rel="stylesheet" type="text/css" href="../css/componentes.css" title="Basico">
+<style>
+body {
+    font-family: arial, tahoma, verdana, sans-serif;
+    font-size: 14px;
+    line-height: 16px;
+}
+</style>
+<script type="text/javascript" src="../js/core.js"></script>
+<script type="text/javascript">
+var jnl;
+window.onload = function() {
+    JSDialogEdit.pastaImagens = '../imagens/';
+    
+    JSDialogEdit.parseDialogURL({
+        "url":"TesteExecucao.json",
+        "metodo":function(j) {
+            jnl = j;
+            //jnl.setVisivel(false);
+        },
+        "erro":function(msg, erro){alert(erro + "\n" + msg)}
+    });
+
+    /*JSDialogEdit.parseDialogURL({
+        "url":"TesteTabela.json",
+        "metodo":function(j) { },
+        "erro":function(msg, erro){alert(erro + "\n" + msg)}
+    });*/
+    
+    btn = new JSDialogEdit.CaixaTexto({"ID":"btn"});
+    btn.setOnFocusFunction(function(e){console.log(e)})
+    btn.setOnMouseOverFunction(function(e){console.log(e)})
+    
+    initAtividadeTecnica();
+}
+
+function alert(v, callback) {
+    JSDialogEdit.Janela.Mensagem({
+        "mensagem" : v
+    });
+}
+
+var tab = null;
+var qtdeAtividade = 1;
+function initAtividadeTecnica() {
+    var aba;
+    
+    aba = new JSDialogEdit.PainelAbas.Aba({
+        "ID": "abaAtividadeTecnica1",
+        "Titulo": 'Atividade Técnica 1'
+    })
+
+    tab = new JSDialogEdit.PainelAbas({
+        "ID": "pnlAbaAtividadeTecnica",
+        "ExibeFecharAba": true,
+        "IconePadrao": "/WebCREA/imagem/application_form_edit.png",
+        "Altura": 250,
+        "Estilos": { "width": "100%" }
+    });
+    tab.setOnCloseFunction(function (e, aba) {
+        if (this.getFilhos().length == 1) return false;
+        var self = this;
+        return true;
+    });
+    tab.setOnChangeFunction(function (e, abaAtiva, novaAba) {return true});
+    document.getElementById('ListaAtividadeTecnica').appendChild(tab.getElemento());
+    tab.addFilho(aba);
+}
+
+function incluirAtividadeTecnica() {
+    qtdeAtividade++;
+
+    novaAba = new JSDialogEdit.PainelAbas.Aba({
+        "ID": "abaAtividadeTecnica" + qtdeAtividade,
+        "Titulo": 'Atividade Técnica ' + (tab.getFilhos().length + 1)
+    })
+    tab.addFilho(novaAba);
+    tab.setAbaAtiva(novaAba);
+}
+
+
+
+
+function abreJanela1(){
+    jnl.setTipoJanela(1);
+    jnl.setVisivel(true);
+}
+
+function abreJanela2(){
+    jnl.setTipoJanela(2);
+    jnl.setVisivel(true);
+}
+
+function abreJanela3(){
+    jnl.setTipoJanela(3);
+    jnl.setVisivel(true);
+}
+</script>
+</head>
+<body>
+<div id="ListaAtividadeTecnica"><input type="button" value="inlcuir" onclick="incluirAtividadeTecnica()"></div>
+
+<h1 style="text-align:center">Lorem Ipsum</h1>
+<table style="border: solid 1px red">
+    <caption>Tabela</caption>
+    <thead>
+        <tr><th>Titulo Coluna</th></tr>
+    </thead>
+    <tbody style="height: 50px;overflow:auto">
+        <tr><td>In ut turpis odio. Praesent pretium ornare elit, vitae cursus quam tempor at.</td></tr>
+        <tr><td>Sed eros orci, aliquam vel convallis vel, mollis vel velit. Aenean porttitor iaculis placerat.</td></tr>
+        <tr><td>Curabitur interdum egestas sapien, ut adipiscing ipsum dictum sit amet.</td></tr>
+        <tr><td>Donec lobortis, lacus ut scelerisque ullamcorper, nunc augue consectetur lectus, luctus consectetur turpis nisl in ante.</td></tr>
+        <tr><td>Nunc quis orci mi. Proin tristique quam a lorem sollicitudin id lobortis mi volutpat.</td></tr>
+        <tr><td>Donec ipsum tellus, ultricies a accumsan vel, aliquet a libero.</td></tr>
+        <tr><td>Proin laoreet neque sit amet nunc pulvinar pretium vulputate augue vehicula.</td></tr>
+        <tr><td>Duis a nulla dolor, sit amet pellentesque enim.</td></tr>
+        <tr><td>Donec cursus purus nulla, ac luctus felis.</td></tr>
+        <tr><td>Phasellus ullamcorper, enim sed scelerisque posuere, sem nulla rutrum libero, ultrices bibendum metus ligula ac mi.</td></tr>
+    </tbody>
+</table>
+
+<div style="float:left; height:1055px; width:200px">
+    <p>MENU</p>
+    <ul>
+        <li onclick="abreJanela1()" style="cursor:pointer; color: blue">Janela</li>
+        <li onclick="abreJanela2()" style="cursor:pointer; color: blue">Caixa Dialog</li>
+        <li onclick="abreJanela3()" style="cursor:pointer; color: blue">Modal</li>
+        <li onclick="alert(new Date())" style="cursor:pointer">Alert</li>
+    </ul>
+</div>
+<div style="text-align:justify; width:75%">
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut iaculis, risus in ornare faucibus, neque ligula venenatis tellus, ac consequat urna arcu et leo. Nam lobortis libero in purus accumsan a pretium nibh auctor. Cras eget erat sit amet tellus blandit eleifend vitae ac sem. Ut ut erat tortor. In non lobortis augue. Duis at elementum elit. Vestibulum libero ante, eleifend ac pretium a, mattis id est. Pellentesque sodales, mi id molestie feugiat, ipsum erat mollis mauris, nec tincidunt odio nisl eget mauris. Vestibulum at diam quam, vitae dapibus metus. Aliquam erat volutpat. Maecenas bibendum lorem eu augue vehicula semper. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nunc placerat orci eu turpis vulputate vulputate.</p>
+    <h2>Lorem Ipsum</h2>
+    <p>In ut turpis odio. Praesent pretium ornare elit, vitae cursus quam tempor at. Sed eros orci, aliquam vel convallis vel, mollis vel velit. Aenean porttitor iaculis placerat. Curabitur interdum egestas sapien, ut adipiscing ipsum dictum sit amet. Donec lobortis, lacus ut scelerisque ullamcorper, nunc augue consectetur lectus, luctus consectetur turpis nisl in ante. Nunc quis orci mi. Proin tristique quam a lorem sollicitudin id lobortis mi volutpat. Donec ipsum tellus, ultricies a accumsan vel, aliquet a libero. Proin laoreet neque sit amet nunc pulvinar pretium vulputate augue vehicula. Duis a nulla dolor, sit amet pellentesque enim. Donec cursus purus nulla, ac luctus felis. Phasellus ullamcorper, enim sed scelerisque posuere, sem nulla rutrum libero, ultrices bibendum metus ligula ac mi.</p>
+    <h3>Lorem Ipsum</h3>
+    <p>Phasellus ut magna vel nulla auctor accumsan. Quisque lacus nunc, condimentum vel auctor ac, vehicula nec ipsum. Pellentesque condimentum, purus ut semper tincidunt, elit lectus bibendum lorem, sit amet posuere justo mi a nisl. Praesent ut arcu in dui porttitor vestibulum. Ut ac justo ante. Donec diam elit, fermentum vitae vehicula ac, dictum sit amet leo. Maecenas pretium adipiscing tellus, quis vestibulum est blandit id. Mauris porta turpis accumsan sapien bibendum mattis. Nunc non odio nec diam tristique tempor. Suspendisse potenti. Vestibulum tincidunt auctor nisl eget convallis. In dignissim auctor rhoncus. Nullam ac lectus ut odio tincidunt volutpat pellentesque et ante. Maecenas elementum, lorem a convallis euismod, risus nisi laoreet velit, eget tristique diam dui eu turpis. Aenean sed tellus vel ipsum ornare egestas vel sed mauris.</p>
+    <h2>Lorem Ipsum</h2>
+    <p>Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Pellentesque id justo turpis. Aliquam vulputate velit non velit vulputate pretium non non turpis. Quisque malesuada augue ac nunc dictum a accumsan eros sodales. Donec elit tellus, laoreet eu tempus in, iaculis nec massa. Phasellus ullamcorper erat sed ipsum tempus vitae pulvinar nisl gravida. Sed velit sem, sollicitudin quis volutpat sed, consequat quis lorem. Ut viverra, erat vel egestas molestie, augue ligula consectetur dui, ut consequat mauris dolor quis nisi. Proin risus libero, iaculis et cursus a, sagittis eget felis. Morbi augue eros, tincidunt nec placerat id, venenatis at leo. Nam ullamcorper condimentum nisi, nec interdum quam adipiscing ut. Pellentesque magna metus, tincidunt elementum dictum non, mollis in lorem. Donec ac metus nibh, ac dapibus nisl.</p>
+    <h2>Lorem Ipsum</h2>
+    <p>Cras at enim ac nulla cursus sagittis at vel enim. In ultricies ultricies risus sed interdum. Maecenas ultrices adipiscing mi a placerat. Mauris sem metus, tempor non bibendum nec, iaculis sed leo. Phasellus vel enim diam. Maecenas suscipit urna ac purus vulputate non volutpat turpis lacinia. In metus mi, rhoncus auctor lobortis condimentum, lobortis aliquam nisi. 
+</div>
+</body>
+</html>

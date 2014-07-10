@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<title>Lorem</title>
+<link rel="stylesheet" type="text/css" href="../css/componentes.css" title="Basico">
+<script type="text/javascript" src="../js/core.js"></script>
+<script type="text/javascript">
+function executar() {
+    JSDialogEdit.pastaImagens = '../imagens/';
+    JSDialogEdit.parseDialog({"classe":"JSDialogEdit.Janela","atributos":{"ID":"janTesteBasico","Largura":254,"Altura":103,"Status":false,"Tipo":3,"Titulo":"Teste Basico","AcaoFechar":1,"Exibicao":"hidden","FocoInicial":"txtAlgo"},"filhos":[{"classe":"JSDialogEdit.Rotulo","atributos":{"ID":"lblEntrada","Valor":"Digite algo:","Largura":67,"Superior":10,"Esquerda":10,"Estilos":{},"Visivel":true}},{"classe":"JSDialogEdit.CaixaTexto","atributos":{"ID":"txtAlgo","Largura":142,"Superior":10,"Esquerda":90,"Estilos":{},"Desabilitado":false,"Visivel":true,"SomenteLeitura":false,"Obrigatorio":false}},{"classe":"JSDialogEdit.Botao","atributos":{"ID":"btnConfirmar","Valor":"Confirmar","Largura":75,"Superior":50,"Esquerda":90,"Estilos":{},"Desabilitado":false,"Visivel":true,"Tipo":"button","OnClick":"alert(this.getConteiner().txtAlgo.getValor());\n"}}]});
+}
+</script>
+</head>
+<body>
+<input type="button" id="botao" value="iniciar" onclick="executar()">
+</body>
+</html>
